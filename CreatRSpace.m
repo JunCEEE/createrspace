@@ -347,11 +347,13 @@ for i = H
 end
 end
 
-function pp = proj(vecs,axis_x, axis_y)
+function [pp,proj_z] = proj(vecs,axis_x, axis_y)
 axis_x = axis_x/norm(axis_x);
 axis_y = axis_y/norm(axis_y);
+axis_z = cross(axis_x,axis_y);
 proj_x = vecs*axis_x';
 proj_y = vecs*axis_y';
+proj_z = vecs*axis_z';
 pp = [proj_x,proj_y];
 end
 
