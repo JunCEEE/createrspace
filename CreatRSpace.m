@@ -29,7 +29,7 @@ fp = 2*pi*fp;
 lcn = 1;
 lc = latticeConstants{lcn}{5}; %Lattice constants: a, b, c; unit: angstrom
 unitcell = latticeConstants{lcn}{4}; %1 for Diamond, 2 for FCC ...
-hkl = getHKL(10,10,10);
+hkl = getHKL(8,8,8);
 sample_axis_x = [1,0,0];
 sample_axis_z = [0,0,1];
 [q,real_hkl] = calculationSingle(hkl,unitcells,unitcell,lc,sample_axis_x,sample_axis_z);
@@ -66,20 +66,25 @@ k_PB = 2*pi*k_PB;
 reciprocal_axis_x = [0,1,0]; 
 reciprocal_axis_y = [0,0,1];
 fig1 = figure;
-axis equal;
+
 
 pq = proj(q,reciprocal_axis_x, reciprocal_axis_y);
 scatter(pq(:,1),pq(:,2),'r');
 hold on
+axis equal;
 pfp = proj(fp,reciprocal_axis_x, reciprocal_axis_y);
-scatter(pfp(:,1),pfp(:,2),'g');
+scatter(pfp(:,1),pfp(:,2),3,'g');
 hold on
+axis equal;
 pk_BB = proj(k_BB,reciprocal_axis_x, reciprocal_axis_y);
-scatter(pk_BB(:,1),pk_BB(:,2),'b');
+plot(pk_BB(:,1),pk_BB(:,2),'b');
 hold on
+axis equal;
 pk_PB = proj(k_PB,reciprocal_axis_x, reciprocal_axis_y);
-scatter(pk_PB(:,1),pk_PB(:,2),'m');
+plot(pk_PB(:,1),pk_PB(:,2),'m');
 hold on
+axis equal;
+
 
 % pqp = proj(qp,reciprocal_axis_x, reciprocal_axis_y);
 % scatter(pqp(:,1),pqp(:,2),'b');
@@ -89,6 +94,7 @@ hold on
 for i = 1:length(q_r)
     circle(0,0,q_r(i));
 end
+axis equal;
 
 %%%% Save %%%%
 save_proj(real_hkl,pq,'Projection.dat');
